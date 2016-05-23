@@ -69,15 +69,17 @@ class Vector {
 
     void push_back(const T &element) {
         resize(_size);
-        _back++;
-        _size++;
+        if (_size++ > 0) {
+            _back++;
+        }
         *_back = element;
     }
 
     void push_front(const T &element) {
         resize(0);
-        _back++;
-        _size++;
+        if (_size++ > 0) {
+            _back++;
+        }
         *_front = element;
     }
 
@@ -87,8 +89,9 @@ class Vector {
         }
 
         resize(index);
-        _back++;
-        _size++;
+        if (_size++ > 0) {
+            _back++;
+        }
         *(_front + index) = element;
     }
 
