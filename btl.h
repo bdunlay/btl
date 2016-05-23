@@ -373,11 +373,13 @@ class Priority_Queue {
         _vector[0] = _vector.back();
         _vector.pop_back();
         int index = 0;
-        while (index++ < _vector.size()) {
-            if (compare(_vector[index], _vector[index-1]) {
+        while (++index < _vector.size()) {
+            if (compare(_vector[index], _vector[index-1])) {
                 T temp = _vector[index-1];
                 _vector[index-1] = _vector[index];
                 _vector[index] = temp;
+            } else {
+                break;
             }
         }
     }
