@@ -88,6 +88,14 @@ class Vector {
         *_front = element;
     }
 
+    void pop_back() {
+        erase(_size - 1);
+    }
+
+    void pop_front() {
+        erase(0);
+    }
+
     void insert(int index, const T &element) {
         if (index < 0 || index > _size) {
             return;
@@ -362,12 +370,16 @@ class Priority_Queue {
     }
 
     void pop() {
-        // TODO(brian): acknowledging suboptimal solution
-        // lazy pop
-        // sould do an O(logn shift) by moving
-        // the last element to the front
-        // and bubbling it down to the correct location
-        _vector.erase(0);
+        _vector[0] = _vector.back();
+        _vector.pop_back();
+        int index = 0;
+        while (index++ < _vector.size()) {
+            if (compare(_vector[index], _vector[index-1]) {
+                T temp = _vector[index-1];
+                _vector[index-1] = _vector[index];
+                _vector[index] = temp;
+            }
+        }
     }
 
  private:
