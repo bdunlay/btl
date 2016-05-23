@@ -51,6 +51,11 @@ class Vector {
         _back = _elements;
     }
 
+    T& operator[](int i)
+    {
+        return _elements[i];
+    }
+
     int size() {
         return _size;
     }
