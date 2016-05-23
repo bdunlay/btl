@@ -107,12 +107,15 @@ class Vector {
     }
 
     void erase(int index) {
-        if (index < 0 || index >= _size) {
-            return;
-        }
-        _elements[index] = 0;
-        for (int i = index+1; index < _size; index++) {
-            _elements[i-1] = _elements[i];
+        if (index >= 0 && index < _size) {
+            _elements[index] = 0;
+            for (int i = index+1; i < _size; i++) {
+                _elements[i-1] = _elements[i];
+            }
+            if (_size > 0) {
+                _back--;
+            }
+            _size--;
         }
     }
 
