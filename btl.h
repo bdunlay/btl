@@ -280,4 +280,34 @@ class List {
     int _size;
 };
 
+template <typename T>
+class Queue {
+ public:
+    Queue() {
+    }
+
+    bool empty() {
+        return (_list.size() == 0);
+    }
+
+    const T& front() {
+        return _list.front();
+    }
+
+    const T& back() {
+        return _list.back();
+    }
+
+    void push(const T& element) {
+        _list.push_back(element);
+    }
+
+    void pop() {
+        _list.pop_front();
+    }
+
+ private:
+    List<T> _list;
+};
+
 }

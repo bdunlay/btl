@@ -5,11 +5,11 @@ Implemented:
 * Vector
 * Stack
 * List
+* Queue
 
 Hopefully Coming Soon:
 
 * Binary_search_tree
-* Queue
 * Priority_queue
 * Unordered_map
 * Tests
