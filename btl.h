@@ -318,4 +318,57 @@ class Queue {
     List<T> _list;
 };
 
+template <typename T, bool compare(int a, int b)>
+class Priority_Queue {
+
+ public:
+    Priority_Queue() {
+    }
+
+    bool empty() {
+        return (_vector.size() == 0);
+    }
+
+    int size() {
+        return _vector.size();
+    }
+
+    const T& top() {
+        return _vector.front();
+    }
+
+    void push(const T& element) {
+        _vector.push_back(element);
+        int index = _vector.size() - 1;
+        int swapIndex;
+        while (index > 0) {
+            if (index % 2 == 1) {
+                swapIndex = (index - 1)/2;
+            } else {
+                swapIndex = (index - 2)/2;
+            }
+            if (compare(_vector[index], _vector[swapIndex])) {
+                T temp = _vector[swapIndex];
+                _vector[swapIndex] = _vector[index];
+                _vector[index] = temp;
+                index = swapIndex;
+            } else {
+                break;
+            }
+        }
+    }
+
+    void pop() {
+        // TODO(brian): acknowledging suboptimal solution
+        // lazy pop
+        // sould do an O(logn shift) by moving
+        // the last element to the front
+        // and bubbling it down to the correct location
+        _vector.erase(0);
+    }
+
+ private:
+    Vector<T> _vector;
+};
+
 }

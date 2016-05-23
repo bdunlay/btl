@@ -6,11 +6,11 @@ Implemented:
 * Stack
 * List
 * Queue
+* Priority_queue
 
 Hopefully Coming Soon:
 
 * Binary_search_tree
-* Priority_queue
 * Unordered_map
 * Tests
 * Some algorithms
