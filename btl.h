@@ -388,4 +388,163 @@ class Priority_Queue {
     Vector<T> _vector;
 };
 
+template <typename T, bool compare(const T& a, const T& b)>
+class Binary_Search_Tree
+{
+    struct Node {
+        T val;
+        Node* left;
+        Node* right;
+        Node* parent;
+    };
+
+ public:
+    Binary_Search_Tree() :
+     _root(nullptr),
+     _min(nullptr),
+     _max(nullptr),
+     _size(0) {
+    }
+
+    bool exists(const T& element) {
+        return exists(element, _root);
+    }
+
+    void insert(const T& element) {
+        insert(element, _root);
+        _size++;
+        if (_size == 1) {
+            _min = _root;
+            _max = _root;
+        } else {
+            if (compare(element, _min->val)) {
+                // should be on the left!
+                _min = _min->left;
+            } else if (compare(_max->val, element)) {
+                // should be on the right!
+                _max = _max->right;
+            }
+        }
+    }
+
+    const T& min() {
+        return _min->val;
+    }
+
+    const T& max() {
+        return _max->val;
+    }
+
+    bool empty() {
+        return (_size == 0);
+    }
+
+    int size() {
+        return _size;
+    }
+
+    void clear() {
+        clear(_root);
+    }
+
+    void pop_min() {
+        Node *temp = _min;
+        if (temp != nullptr) {
+            _min = _min->parent;
+            delete temp;
+            _size--;
+        }
+    }
+
+    void pop_max() {
+        Node *temp = _max;
+        if (temp != nullptr) {
+            _max = _max->parent;
+            delete temp;
+            _size--;
+        }
+    }
+
+    // void erase(const T& element) {
+    //     // what if there are duplicates?
+    //     // need to know which node
+    // }
+
+    // T* preOrder() {
+
+    // }
+
+    // T* inOrder() {
+
+    // }
+
+    // T* postOrder() {
+
+    // }
+
+ private:
+    Node *_root;
+    Node *_min;
+    Node *_max;
+    int _size;
+
+    bool exists(const T& element, Node *node) {
+        if (node == nullptr) {
+            return false;
+        }
+
+        if (element == node->val) {
+            return true;
+        }
+
+        if (compare(element, node->val)) {
+            return exists(element, node->left);
+        } else {
+            return exists(element, node->right);
+        }
+    }
+
+    void clear(Node *node) {
+        if (node == nullptr) {
+            return;
+        }
+
+        clear(node->left);
+        clear(node->right);
+        delete node;
+    }
+
+    void insert(const T& element, Node *node) {
+        if (node == nullptr) {
+            node = new Node();
+            node->left = nullptr;
+            node->left = nullptr;
+            node->parent = nullptr;
+            node->val = element;
+        }
+
+        if (compare(element, node->val)) {
+            if (node->left == nullptr) {
+                node->left = new Node();
+                node->left->parent = node;
+                node->left->left = nullptr;
+                node->left->right = nullptr;
+                node->left->val = element;
+            } else {
+                insert(element, node->left);
+            }
+        } else {
+            if (node->right == nullptr) {
+                node->right = new Node();
+                node->right->parent = node;
+                node->right->left = nullptr;
+                node->right->right = nullptr;
+                node->right->val = element;
+            } else {
+                insert(element, node->right);
+            }
+        }
+    }
+};
+
 }

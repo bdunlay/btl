@@ -7,10 +7,10 @@ Implemented:
 * List
 * Queue
 * Priority_queue
+* Binary_search_tree
 
 Hopefully Coming Soon:
 
-* Binary_search_tree
 * Unordered_map
 * Tests
 * Some algorithms
